@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1038592353575",
+    "project_id": "eztoll-aee48",
+    "storage_bucket": "eztoll-aee48.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1038592353575:android:9233e6220387478ef43502",
+        "android_client_info": {
+          "package_name": "com.tanav.eztoll"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1038592353575-l1n3blu02op4200i13s5li1aj833hh4h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAC6j7RzPdE3eBNYh21h2vhuX48jID9gLs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1038592353575-l1n3blu02op4200i13s5li1aj833hh4h.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
