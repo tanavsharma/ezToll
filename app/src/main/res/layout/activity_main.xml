@@ -235,7 +235,6 @@
                     android:layout_marginRight="5dp"
                     app:shapeAppearanceOverlay="@style/Button4"
                     app:boxStrokeWidth="1dp"
-                    app:endIconMode="password_toggle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
@@ -244,7 +243,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:ems="10"
-                        android:inputType="textPassword"
+                        android:inputType="text"
                         android:minHeight="48dp"
                         android:textColor="@color/black"
                         android:textSize="13sp"
@@ -259,7 +258,6 @@
                     android:layout_marginRight="5dp"
                     app:shapeAppearanceOverlay="@style/Button4"
                     app:boxStrokeWidth="1dp"
-                    app:endIconMode="password_toggle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
@@ -268,7 +266,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:ems="10"
-                        android:inputType="textPassword"
+                        android:inputType="text"
                         android:minHeight="48dp"
                         android:textColor="@color/black"
                         android:textSize="13sp"

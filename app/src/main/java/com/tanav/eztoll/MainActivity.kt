@@ -1,6 +1,7 @@
 package com.tanav.eztoll
 
 import android.content.ContentValues.TAG
+import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -25,6 +26,9 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var userEmail: String
     lateinit var userPassword: String
+
+    lateinit var loginEmail: String
+    lateinit var loginPassword: String
 
     private lateinit var auth: FirebaseAuth;
     
@@ -58,6 +62,7 @@ class MainActivity : AppCompatActivity() {
             LogInLayout.visibility = View.VISIBLE
             SignUpLayout.visibility = View.GONE
             signUpToggle.setTextColor(resources.getColor(R.color.pinkColor, null))
+            mainBtn.setText("Login")
         }
 
         mainBtn.setOnClickListener {
@@ -68,11 +73,30 @@ class MainActivity : AppCompatActivity() {
                 if(!Patterns.EMAIL_ADDRESS.matcher(email.text.toString()).matches()){
                     email.error = "Please enter valid email"
                     email.requestFocus()
+                }else{
+                    loginEmail = email.text.toString()
                 }
+
                 if(pass.text.toString().isEmpty()){
                     pass.error = "Please enter a password"
                     pass.requestFocus()
+                }else{
+                    loginPassword = pass.text.toString()
                 }
+
+                auth.signInWithEmailAndPassword(loginEmail, loginPassword)
+                    .addOnCompleteListener(this) { task ->
+                        if (task.isSuccessful) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Toast.makeText(applicationContext, "Signing You In....", Toast.LENGTH_SHORT).show()
+                            val intent = Intent(this, UserInterface::class.java)
+                            startActivity(intent)
+                        } else {
+                            Toast.makeText(applicationContext, "Wrong, Try again!", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+
+
             }
 
 
