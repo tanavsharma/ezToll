@@ -11,4 +11,5 @@
     <color name="pinkColor">#2196F3</color>
     <color name="transparentColor">#00FFFFFF</color>
     <color name="signupcolor">#434242</color>
+    <color name="colorNotificationIcon">#006600</color>
 </resources>

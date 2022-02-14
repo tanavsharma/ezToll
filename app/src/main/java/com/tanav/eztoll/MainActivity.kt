@@ -2,6 +2,7 @@ package com.tanav.eztoll
 
 import android.content.ContentValues.TAG
 import android.content.Intent
+import android.content.IntentFilter
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -30,8 +31,10 @@ class MainActivity : AppCompatActivity() {
     lateinit var loginEmail: String
     lateinit var loginPassword: String
 
-    private lateinit var auth: FirebaseAuth;
-    
+    private lateinit var auth: FirebaseAuth
+
+    private lateinit var receiver: TrackToggleAlarmReceiver
+
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -143,9 +146,13 @@ class MainActivity : AppCompatActivity() {
 
         }
 
+        receiver = TrackToggleAlarmReceiver()
+        val reminderFilter : IntentFilter  = IntentFilter(AppConst.ACTION_REMINDER)
+        registerReceiver(receiver, reminderFilter)
+    }
 
-
-
-
+    override fun onDestroy() {
+        super.onDestroy()
+        unregisterReceiver(receiver)
     }
 }

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+        android:key="sp_key_tracking_enable_category"
+        android:title="@string/sp_track_cat_title"
+        >
+        <CheckBoxPreference
+            android:key="sp_key_do_tracking"
+            android:title="@string/sp_do_tracking_title"
+            android:summary="@string/sp_do_tracking_summary"
+            android:defaultValue="true"/>
+
+    </PreferenceCategory>
+</PreferenceScreen>

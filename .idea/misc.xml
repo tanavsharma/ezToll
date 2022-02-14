@@ -7,6 +7,7 @@
         <entry key="app/src/main/res/drawable/switch_unhighlight.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_user_interface.xml" value="0.1" />
+        <entry key="app/src/main/res/xml/preferences.xml" value="0.22" />
       </map>
     </option>
   </component>
