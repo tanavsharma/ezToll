@@ -19,17 +19,17 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var email: EditText
-    lateinit var pass: EditText
-    lateinit var signupEmail: EditText
-    lateinit var signupPassword: EditText
-    lateinit var verifyPassword: EditText
+    private lateinit var email: EditText
+    private lateinit var pass: EditText
+    private lateinit var signupEmail: EditText
+    private lateinit var signupPassword: EditText
+    private lateinit var verifyPassword: EditText
 
-    lateinit var userEmail: String
-    lateinit var userPassword: String
+    private lateinit var userEmail: String
+    private lateinit var userPassword: String
 
-    lateinit var loginEmail: String
-    lateinit var loginPassword: String
+    private lateinit var loginEmail: String
+    private lateinit var loginPassword: String
 
     private lateinit var auth: FirebaseAuth
 
@@ -42,12 +42,12 @@ class MainActivity : AppCompatActivity() {
 
         auth = Firebase.auth
 
-        email = findViewById<EditText>(R.id.email)
-        pass = findViewById<EditText>(R.id.password)
+        email = findViewById(R.id.email)
+        pass = findViewById(R.id.password)
 
-        signupEmail = findViewById<EditText>(R.id.signupEmail)
-        signupPassword = findViewById<EditText>(R.id.SignUpPassword)
-        verifyPassword = findViewById<EditText>(R.id.VerifyPassword)
+        signupEmail = findViewById(R.id.signupEmail)
+        signupPassword = findViewById(R.id.SignUpPassword)
+        verifyPassword = findViewById(R.id.VerifyPassword)
 
         signUpToggle.setOnClickListener {
             signUpToggle.background = resources.getDrawable(R.drawable.switch_highlighted, null)
@@ -124,7 +124,7 @@ class MainActivity : AppCompatActivity() {
                     userPassword = verifyPassword.text.toString()
                 }
 
-                if(!signupPassword.text.toString().equals(verifyPassword.text.toString())){
+                if(signupPassword.text.toString() != verifyPassword.text.toString()){
                     signupPassword.error = "Passwords don't match"
                     verifyPassword.error = "Passwords don't match"
                     signupPassword.requestFocus()
@@ -135,6 +135,9 @@ class MainActivity : AppCompatActivity() {
                         if (task.isSuccessful) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "createUserWithEmail:success")
+                            val intent = Intent(this, UserInformation::class.java)
+                            startActivity(intent)
+
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "createUserWithEmail:failure", task.exception)
