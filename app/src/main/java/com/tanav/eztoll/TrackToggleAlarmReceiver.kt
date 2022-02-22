@@ -22,7 +22,7 @@ class TrackToggleAlarmReceiver : WakefulBroadcastReceiver() {
         Log.d("sch", "TrackToggleAlarmReceiver, onReceive() running")
 
         // resume the tracking
-        val pref: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
+        val pref: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context!!)
         val editor: SharedPreferences.Editor = pref.edit()
         editor.putBoolean("sp_key_do_tracking", true)
         editor.commit()

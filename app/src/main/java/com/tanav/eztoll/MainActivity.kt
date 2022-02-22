@@ -1,5 +1,6 @@
 package com.tanav.eztoll
 
+import android.app.ProgressDialog
 import android.content.ContentValues.TAG
 import android.content.Intent
 import android.content.IntentFilter
@@ -14,6 +15,8 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -32,6 +35,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var loginPassword: String
 
     private lateinit var auth: FirebaseAuth
+    private lateinit var database: DatabaseReference
 
     private lateinit var receiver: TrackToggleAlarmReceiver
 
@@ -41,6 +45,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         auth = Firebase.auth
+        database = Firebase.database.getReference("Users")
 
         email = findViewById(R.id.email)
         pass = findViewById(R.id.password)
@@ -92,6 +97,7 @@ class MainActivity : AppCompatActivity() {
                         if (task.isSuccessful) {
                             // Sign in success, update UI with the signed-in user's information
                             Toast.makeText(applicationContext, "Signing You In....", Toast.LENGTH_SHORT).show()
+
                             val intent = Intent(this, UserInterface::class.java)
                             startActivity(intent)
                         } else {
@@ -130,12 +136,18 @@ class MainActivity : AppCompatActivity() {
                     signupPassword.requestFocus()
                     verifyPassword.requestFocus()
                 }
+
                 auth.createUserWithEmailAndPassword(userEmail, userPassword)
                     .addOnCompleteListener(this) { task ->
                         if (task.isSuccessful) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "createUserWithEmail:success")
+
+                            var userUniqueID = auth.currentUser!!.uid
+                            database.child(userUniqueID)
+
                             val intent = Intent(this, UserInformation::class.java)
+                            intent.putExtra("uniqueID",userUniqueID)
                             startActivity(intent)
 
                         } else {

@@ -8,66 +8,84 @@
     android:orientation="vertical"
     tools:context=".UserInterface">
 
-    <!-- 1.1 Layout for User Profile Picture and Welcome Screen -->
-    <LinearLayout
-        android:orientation="horizontal"
+    <!-- <androidx.cardview.widget.CardView -->
+    <androidx.cardview.widget.CardView
+        app:cardCornerRadius="15dp"
+        app:cardElevation="10dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        app:cardUseCompatPadding="true"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="2"
-        android:weightSum="5">
+        android:layout_height="180dp">
 
-        <!-- Profile Picture Layout -->
+        <!-- 1.1 Layout for User Profile Picture and Welcome Screen -->
         <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_weight="2"
-            android:gravity="center">
+            android:weightSum="5">
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/profile_image"
-                android:layout_width="130dp"
-                android:layout_height="130dp"
-                android:src="@drawable/johndoe"
-                app:civ_border_width="2dp"
-                app:civ_border_color="#FF000000"
-                android:layout_gravity="center"
-                />
+            <!-- Profile Picture Layout -->
+            <LinearLayout
+                android:paddingLeft="15dp"
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:gravity="center">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/profile_image"
+                    android:paddingLeft="5dp"
+                    android:paddingTop="5dp"
+                    android:paddingRight="5dp"
+                    android:layout_width="125dp"
+                    android:layout_height="125dp"
+                    android:src="@drawable/johndoe"
+                    app:civ_border_color="#FF000000"
+                    android:layout_gravity="center"
+                    />
+
+            </LinearLayout>
+
+            <!-- Welcome Message Layout -->
+            <LinearLayout
+
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3.4">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="40sp"
+                    android:text="Welcome"
+                    android:padding="10dp"
+                    android:layout_gravity="center">
+                </TextView>
+
+
+                <TextView
+                    android:id="@+id/NameOfUser"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="30sp"
+                    android:text="John Doe"
+                    android:padding="10dp"
+                    android:layout_gravity="center">
+                </TextView>
+
+            </LinearLayout>
 
         </LinearLayout>
+        <!-- 1.1 ENDS -->
+    </androidx.cardview.widget.CardView>
 
-        <!-- Welcome Message Layout -->
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="3">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="40sp"
-                android:text="Welcome"
-                android:padding="10dp"
-                android:layout_gravity="center">
-            </TextView>
-
-
-            <TextView
-                android:id="@+id/NameOfUser"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="30sp"
-                android:text="John Doe"
-                android:padding="10dp"
-                android:layout_gravity="center">
-            </TextView>
-
-        </LinearLayout>
-
-    </LinearLayout>
-    <!-- 1.1 ENDS -->
 
     <LinearLayout
         android:layout_width="match_parent"

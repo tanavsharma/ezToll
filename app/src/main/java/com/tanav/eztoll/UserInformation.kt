@@ -1,8 +1,13 @@
 package com.tanav.eztoll
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.EditText
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
+import com.tanav.eztoll.Models.User
 import kotlinx.android.synthetic.main.activity_user_information.*
 
 class UserInformation : AppCompatActivity() {
@@ -22,10 +27,15 @@ class UserInformation : AppCompatActivity() {
     private lateinit var country: String
     private lateinit var city: String
     private lateinit var postalCode: String
+    private lateinit var url: String
+
+    private lateinit var database: DatabaseReference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_information)
+
+        val userUniqueID = intent.getStringExtra("uniqueID")
 
         fname_et = findViewById(R.id.fistName)
         lname_et = findViewById(R.id.lastName)
@@ -34,6 +44,10 @@ class UserInformation : AppCompatActivity() {
         country_et = findViewById(R.id.addressCountry)
         city_et = findViewById(R.id.addressCity)
         postalCode_et = findViewById(R.id.addressPostalCode)
+
+        url = "no pic"
+
+        database = Firebase.database.getReference("Users")
 
         submitBtn.setOnClickListener {
             if(fname_et.text.toString().isEmpty()){
@@ -77,11 +91,10 @@ class UserInformation : AppCompatActivity() {
             }else{
                 postalCode = postalCode_et.text.toString()
             }
-
-
-            // import these values into a database
-
-
+            val userValues = User(fname,lname,gender,street,country,city,postalCode,url)
+            database.child(userUniqueID!!).setValue(userValues)
+            val intent = Intent(this, UserInterface::class.java)
+            startActivity(intent)
         }
     }
 }
