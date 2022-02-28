@@ -142,6 +142,7 @@
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <TextView
+                        android:id="@+id/forgotPasscode"
                         android:textSize="11sp"
                         android:text="@string/i_forgot_my_password"
                         android:textColor="#616161"
