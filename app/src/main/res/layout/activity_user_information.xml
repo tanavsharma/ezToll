@@ -17,13 +17,6 @@
         tools:context=".MainActivity">
 
 
-        <ImageView
-            android:id="@+id/ezTollLogo"
-            android:layout_width="wrap_content"
-            android:layout_height="70dp"
-            android:layout_marginTop="45dp"
-            app:srcCompat="@drawable/eztoll"
-            android:contentDescription="@string/logo" />
 
         <androidx.cardview.widget.CardView
             app:cardCornerRadius="25dp"
@@ -216,32 +209,28 @@
                             tools:ignore="TextContrastCheck" />
                     </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
-
-                <Button
-                    android:id="@+id/submitBtn"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginEnd="24dp"
-                    android:backgroundTint="@color/pinkColor"
-                    android:elevation="15dp"
-                    android:gravity="center"
-                    android:minHeight="48dp"
-                    android:text="@string/submit"
-                    android:textAllCaps="false"
-                    android:textColor="@color/textColor"
-                    android:textSize="17sp"
-                    tools:ignore="DuplicateSpeakableTextCheck,TextContrastCheck" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-
-
             </LinearLayout>
-
-
         </androidx.cardview.widget.CardView>
+
+        <Button
+            android:id="@+id/submitBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:backgroundTint="@color/pinkColor"
+            android:elevation="15dp"
+            android:gravity="center"
+            android:minHeight="48dp"
+            android:text="@string/submit"
+            android:textAllCaps="false"
+            android:textColor="@color/textColor"
+            android:textSize="17sp"
+            tools:ignore="DuplicateSpeakableTextCheck,TextContrastCheck" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
     </LinearLayout>
 
 
