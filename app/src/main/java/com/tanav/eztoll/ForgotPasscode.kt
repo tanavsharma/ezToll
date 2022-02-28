@@ -1,5 +1,6 @@
 package com.tanav.eztoll
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.EditText
@@ -34,8 +35,11 @@ class ForgotPasscode : AppCompatActivity() {
 
                     }
                 }
+        }
 
-
+        goBack.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
         }
 
 
