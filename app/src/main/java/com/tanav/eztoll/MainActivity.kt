@@ -54,6 +54,11 @@ class MainActivity : AppCompatActivity() {
         signupPassword = findViewById(R.id.SignUpPassword)
         verifyPassword = findViewById(R.id.VerifyPassword)
 
+        forgotPasscode.setOnClickListener {
+            val intent = Intent(this, ForgotPasscode::class.java)
+            startActivity(intent)
+        }
+
         signUpToggle.setOnClickListener {
             signUpToggle.background = resources.getDrawable(R.drawable.switch_highlighted, null)
             signUpToggle.setTextColor(resources.getColor(R.color.textColor, null))
