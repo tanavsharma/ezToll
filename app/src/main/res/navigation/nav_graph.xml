@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/userFragment">
+
+    <fragment
+        android:id="@+id/userFragment"
+        android:name="com.tanav.eztoll.fragments.UserFragment"
+        android:label="fragment_user"
+        tools:layout="@layout/fragment_user" />
+    <fragment
+        android:id="@+id/tollMapFragment"
+        android:name="com.tanav.eztoll.fragments.TollMapFragment"
+        android:label="fragment_toll_map"
+        tools:layout="@layout/fragment_toll_map" />
+    <fragment
+        android:id="@+id/trackMapFragment"
+        android:name="com.tanav.eztoll.fragments.TrackMapFragment"
+        android:label="fragment_track_map"
+        tools:layout="@layout/fragment_track_map" />
+    <fragment
+        android:id="@+id/paymentHistoryFragment"
+        android:name="com.tanav.eztoll.fragments.PaymentHistoryFragment"
+        android:label="fragment_payment_history"
+        tools:layout="@layout/fragment_payment_history" />
+</navigation>

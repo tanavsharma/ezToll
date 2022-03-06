@@ -1,0 +1,21 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+    <item
+        android:id="@+id/userFragment"
+        android:title="User profile"
+        android:icon="@drawable/ic_baseline_manage_accounts_24"/>
+    <item
+        android:id="@+id/tollMapFragment"
+        android:title="Toll Map"
+        android:icon="@drawable/ic_baseline_map_24"/>
+    <item
+        android:id="@+id/trackMapFragment"
+        android:title="Tracking Map"
+        android:icon="@drawable/ic_baseline_track_changes_24"/>
+    <item
+        android:id="@+id/paymentHistoryFragment"
+        android:title="Payment History"
+        android:icon="@drawable/ic_baseline_payments_24"/>
+</menu>
