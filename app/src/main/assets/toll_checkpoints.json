@@ -1,0 +1,57 @@
+[
+  {
+    "id": 10100,
+    "type": "CHECKPOINT",
+    "lat": 43.855486,
+    "lng": -79.170236,
+    "remark": "Steel Ave E / Scarborough Pickering Townline"
+  }
+,
+  {
+    "id": 10110,
+    "type": "MIDPOINT",
+    "lat": 43.853153,
+    "lng": -79.180013,
+    "remark": "Steel Ave E / Beare Rd"
+  }
+,
+  {
+    "id": 10120,
+    "type": "MIDPOINT",
+    "lat": 43.850770,
+    "lng": -79.189749,
+    "remark": "Steel Ave E / Gordon Murison ln Rd"
+  }
+,
+  {
+    "id": 10130,
+    "type": "MIDPOINT",
+    "lat": 43.848515,
+    "lng": -79.199303,
+    "remark": "Steel Ave E / Reesor Rd"
+  }
+,
+  {
+    "id": 10200,
+    "type": "CHECKPOINT",
+    "lat": 43.836664,
+    "lng": -79.251150,
+    "remark": "Steel Ave E / Markham Rd"
+  }
+,
+  {
+    "id": 10210,
+    "type": "MIDPOINT",
+    "lat": 43.834296,
+    "lng": -79.261170,
+    "remark": "Steel Ave E / Shadlock St"
+  }
+,
+  {
+    "id": 10300,
+    "type": "CHECKPOINT",
+    "lat": 43.832709,
+    "lng": -79.267908,
+    "remark": "Steel Ave E / Middlefield Rd"
+  }
+]

@@ -7,4 +7,6 @@ object AppConst {
     const val NOTIFICATION_ID_REMINDER = 10001  //Notification ID for the tracking enable reminder
     const val ACTION_REMINDER = "com.tanav.eztool.TrackToggleAlarmReceiver.ACTION_REMINDER"  //Intent filter to reminder alarm
 
+    const val TOLL_ROAD_FILE = "toll_checkpoints.json"
+
 }
