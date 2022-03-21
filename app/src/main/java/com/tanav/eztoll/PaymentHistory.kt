@@ -1,14 +1,23 @@
 package com.tanav.eztoll
 
+import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_payment_history.*
 import java.time.LocalDateTime
 import java.time.temporal.ChronoField
+import java.util.*
+import java.util.UUID
 
 
 class PaymentHistory : AppCompatActivity() {
@@ -26,11 +35,18 @@ class PaymentHistory : AppCompatActivity() {
     private lateinit var ccExpiryYear: String
     private lateinit var ccCVV: String
 
+    private lateinit var auth: FirebaseAuth
+
+
+
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_payment_history)
+
+        val db = Firebase.firestore
+        auth = Firebase.auth
 
         ccET = findViewById(R.id.creditcard)
         nameOnCardET = findViewById(R.id.nameOnCard)
@@ -43,21 +59,38 @@ class PaymentHistory : AppCompatActivity() {
 
 
         payBill.setOnClickListener {
+
+            val user = auth.currentUser!!.uid
+            val current = LocalDateTime.now()
+
+            val currentDay = current.get(ChronoField.DAY_OF_MONTH)
+            val currentMonth = current.get(ChronoField.MONTH_OF_YEAR)
+            val currentYear = current.get(ChronoField.YEAR)
+
+            val todayDate = currentDay.toString() + " " + currentMonth.toString() + ", " + currentYear.toString()
+
             ccNumber = ccET.text.toString()
             chName = nameOnCardET.text.toString()
             ccExpiryMonth = expiryMonthET.text.toString()
             ccExpiryYear = expiryYearET.text.toString()
             ccCVV = cvvET.text.toString()
 
+            if(isValid(ccNumber) && !ccNumber.isEmpty() && !chName.isEmpty() && !ccExpiryMonth.isEmpty() && !ccExpiryYear.isEmpty() && isExpired(ccExpiryMonth,ccExpiryYear) && ! ccCVV.isEmpty()){
 
+                val rcpt = hashMapOf(
+                    "Card Holder Name" to chName,
+                    "Expiry Month" to ccExpiryMonth,
+                    "Expiry Year" to ccExpiryYear,
+                    "Date of Payment" to todayDate,
+                    "Amount" to "$34.99"
+                )
 
-            if(isValid(ccNumber)
-                && !ccNumber.isEmpty()
-                && !chName.isEmpty()
-                && !ccExpiryMonth.isEmpty()
-                && !ccExpiryYear.isEmpty()
-                && isExpired(ccExpiryMonth,ccExpiryYear)
-                && ! ccCVV.isEmpty()){
+                db.collection(user).add(rcpt).addOnSuccessListener { documentReference ->
+                    Log.d(TAG, "DocumentSnapshot added with ID: ${documentReference.id}")
+                }.addOnFailureListener{ e ->
+                    Log.w(TAG, "Error adding document", e)
+                }
+
 
                 val intent = Intent(applicationContext, PaymentConfirmed::class.java)
                 startActivity(intent)
@@ -66,6 +99,10 @@ class PaymentHistory : AppCompatActivity() {
             }
 
 
+        }
+        viewPreviousBills.setOnClickListener {
+            val intent = Intent(applicationContext, PastPayements::class.java)
+            startActivity(intent)
         }
 
     }

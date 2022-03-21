@@ -19,6 +19,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EzToll">
         <activity
+            android:name=".PastPayements"
+            android:exported="false" />
+        <activity
             android:name=".PaymentConfirmed"
             android:exported="false" />
         <activity
