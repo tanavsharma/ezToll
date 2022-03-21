@@ -1,5 +1,5 @@
-<resources>
-    <string name="app_name">ezToll</string>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name" tools:ignore="PrivateResource">ezToll</string>
 
     <!-- Login/Register Screen -->
     <string name="login">Login</string>
@@ -22,11 +22,20 @@
 
 
     <string name="option_settings">Settings</string>
+    <string name="option_updateProfile">Update Profile</string>
     <string name="sp_track_cat_title">Tracking General Settings</string>
     <string name="sp_do_tracking_title">Enable Tracking </string>
     <string name="sp_do_tracking_summary">Turn on / off the tracking function</string>
     <string name="sp_do_tracking_enabled">Auto Tracking Enabled</string>
     <string name="sp_do_tracking_disabled">Auto Tracking Disabled</string>
     <string name="auto_resume_message">Auto Tracking is automatically resumed</string>
+    <string name="update_profile">Update Profile</string>
+    <string name="payements">Payements</string>
+    <string name="not_valid_card">Not Valid Card</string>
+    <string name="validCard">Valid</string>
+    <string name="thankyouMessage">Thank you for your payment. It have been processed.</string>
+    <string name="payment_confirmed">Payment Confirmed</string>
+    <string name="pastPayments">All your payment information and recipts are stored on our secure servers. You can click the button below to view your past payements.</string>
+    <string name="payment_history">Payment History</string>
 
 </resources>

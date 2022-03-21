@@ -69,13 +69,40 @@ class UserInterface : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         // create a fragment instance according to the option menu selection
-        return if (item.itemId == R.id.action_settings) {
+        
+        return if(item.itemId == R.id.action_settings){
             val intent = Intent(this, SettingsActivity::class.java)
             startActivity(intent)
             true
-        } else {
+        }else if(item.itemId == R.id.update_profile){
+            val intent = Intent(this, UserInformation::class.java)
+            startActivity(intent)
+            true
+        }else if(item.itemId == R.id.paymentScreen){
+            val intent = Intent(this, PaymentHistory::class.java)
+            startActivity(intent)
+            true
+        }else{
             super.onOptionsItemSelected(item)
         }
+
+
+//        return if (item.itemId == R.id.update_profile) {
+//            val intent2 = Intent(this, UserInformation::class.java)
+//            startActivity(intent2)
+//            true
+//        } else {
+//            super.onOptionsItemSelected(item)
+//        }
+//
+//        return if (item.itemId == R.id.paymentScreen) {
+//            val intent3 = Intent(this, PaymentHistory::class.java)
+//            startActivity(intent3)
+//            true
+//        } else {
+//            super.onOptionsItemSelected(item)
+//        }
+
     }
 
     private fun switchFragment(toFragment: Fragment) : Boolean {
