@@ -67,7 +67,22 @@ class PaymentHistory : AppCompatActivity() {
             val currentMonth = current.get(ChronoField.MONTH_OF_YEAR)
             val currentYear = current.get(ChronoField.YEAR)
 
-            val todayDate = currentDay.toString() + " " + currentMonth.toString() + ", " + currentYear.toString()
+            var monthDict = mapOf(
+                "1" to "January",
+                "2" to "Feburary",
+                "3" to "March",
+                "4" to "April",
+                "5" to "May",
+                "6" to "June",
+                "7" to "July",
+                "8" to "August",
+                "9" to "September",
+                "10" to "October",
+                "11" to "November",
+                "12" to "December"
+            )
+
+            val todayDate = currentDay.toString() + " " + monthDict[currentMonth.toString()] + ", " + currentYear.toString()
 
             ccNumber = ccET.text.toString()
             chName = nameOnCardET.text.toString()
@@ -78,11 +93,11 @@ class PaymentHistory : AppCompatActivity() {
             if(isValid(ccNumber) && !ccNumber.isEmpty() && !chName.isEmpty() && !ccExpiryMonth.isEmpty() && !ccExpiryYear.isEmpty() && isExpired(ccExpiryMonth,ccExpiryYear) && ! ccCVV.isEmpty()){
 
                 val rcpt = hashMapOf(
-                    "Card Holder Name" to chName,
-                    "Expiry Month" to ccExpiryMonth,
-                    "Expiry Year" to ccExpiryYear,
-                    "Date of Payment" to todayDate,
-                    "Amount" to "$34.99"
+                    "chName" to chName,
+                    "expiryMonth" to ccExpiryMonth,
+                    "expiryYear" to ccExpiryYear,
+                    "dateOfPayment" to todayDate,
+                    "amount" to "$34.99"
                 )
 
                 db.collection(user).add(rcpt).addOnSuccessListener { documentReference ->
