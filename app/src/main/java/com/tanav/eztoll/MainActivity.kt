@@ -11,7 +11,9 @@ import android.util.Log
 import android.util.Patterns
 import android.view.View
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.Toast
+import android.widget.ViewFlipper
 import androidx.annotation.RequiresApi
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -43,6 +45,13 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        val imgArray = intArrayOf(R.drawable.eztoll, R.drawable.eztoll2, R.drawable.eztoll3)
+        flipper = findViewById(R.id.ezTollLogo)
+
+        for (j in imgArray) {
+            showImages(j)
+        }
 
         auth = Firebase.auth
         database = Firebase.database.getReference("Users")
@@ -169,6 +178,16 @@ class MainActivity : AppCompatActivity() {
         receiver = TrackToggleAlarmReceiver()
         val reminderFilter : IntentFilter  = IntentFilter(AppConst.ACTION_REMINDER)
         registerReceiver(receiver, reminderFilter)
+    }
+    private var flipper: ViewFlipper? = null
+    fun showImages(img: Int) {
+        val imageView = ImageView(this)
+        imageView.setBackgroundResource(img)
+        flipper?.addView(imageView)
+        flipper?.setFlipInterval(5000)
+        flipper?.setAutoStart(true)
+        flipper?.setInAnimation(this, android.R.anim.slide_in_left)
+        flipper?.setInAnimation(this, android.R.anim.slide_out_right)
     }
 
     override fun onDestroy() {
