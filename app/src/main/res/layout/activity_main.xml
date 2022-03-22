@@ -14,13 +14,13 @@
         tools:context=".MainActivity">
 
 
-        <ImageView
+        <ViewFlipper
             android:id="@+id/ezTollLogo"
-            android:layout_width="wrap_content"
-            android:layout_height="100dp"
+            android:layout_width="410dp"
+            android:layout_height="137dp"
             android:layout_marginTop="45dp"
-            app:srcCompat="@drawable/eztoll"
-            android:contentDescription="@string/logo" />
+            android:contentDescription="@string/logo"
+            app:srcCompat="@drawable/eztoll" />
 
         <androidx.cardview.widget.CardView
             app:cardCornerRadius="25dp"
