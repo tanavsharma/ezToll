@@ -1,12 +1,16 @@
 package com.tanav.eztoll
 
+import android.Manifest
 import android.app.ProgressDialog
 import android.content.ContentValues.TAG
 import android.content.Intent
 import android.content.IntentFilter
+import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.Settings
 import android.util.Log
 import android.util.Patterns
 import android.view.View
@@ -15,12 +19,17 @@ import android.widget.ImageView
 import android.widget.Toast
 import android.widget.ViewFlipper
 import androidx.annotation.RequiresApi
+import androidx.core.app.ActivityCompat
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import com.tanav.eztoll.services.AutoStartService
 import kotlinx.android.synthetic.main.activity_main.*
+
+private const val REQUEST_FOREGROUND_ONLY_PERMISSIONS_REQUEST_CODE = 34
 
 class MainActivity : AppCompatActivity() {
 
@@ -178,7 +187,16 @@ class MainActivity : AppCompatActivity() {
         receiver = TrackToggleAlarmReceiver()
         val reminderFilter : IntentFilter  = IntentFilter(AppConst.ACTION_REMINDER)
         registerReceiver(receiver, reminderFilter)
+
+        //for location service
+        if (foregroundPermissionApproved()) {
+            val serviceIntent = Intent(this, AutoStartService::class.java)
+            startForegroundService(serviceIntent)
+        } else {
+            requestForegroundPermissions()
+        }
     }
+
     private var flipper: ViewFlipper? = null
     fun showImages(img: Int) {
         val imageView = ImageView(this)
@@ -192,6 +210,90 @@ class MainActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        unregisterReceiver(receiver)
+    }
+    //for location service
+    private fun foregroundPermissionApproved(): Boolean {
+        return PackageManager.PERMISSION_GRANTED == ActivityCompat.checkSelfPermission(
+            this,
+            Manifest.permission.ACCESS_FINE_LOCATION
+        )
+    }
+
+    //for location service
+    private fun requestForegroundPermissions() {
+        val provideRationale = foregroundPermissionApproved()
+
+        // If the user denied a previous request, but didn't check "Don't ask again", provide
+        // additional rationale.
+        if (provideRationale) {
+            Snackbar.make(
+                findViewById(R.id.activity_main),
+                R.string.permission_rationale,
+                Snackbar.LENGTH_LONG
+            )
+                .setAction(R.string.ok) {
+                    // Request permission
+                    ActivityCompat.requestPermissions(
+                        this@MainActivity,
+                        arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                        REQUEST_FOREGROUND_ONLY_PERMISSIONS_REQUEST_CODE
+                    )
+                }
+                .show()
+        } else {
+            Log.d(TAG, "Request foreground only permission")
+            ActivityCompat.requestPermissions(
+                this@MainActivity,
+                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                REQUEST_FOREGROUND_ONLY_PERMISSIONS_REQUEST_CODE
+            )
+        }
+    }
+
+    //for location service
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        Log.d(TAG, "onRequestPermissionResult")
+
+        when (requestCode) {
+            REQUEST_FOREGROUND_ONLY_PERMISSIONS_REQUEST_CODE -> when {
+                grantResults.isEmpty() ->
+                    // If user interaction was interrupted, the permission request
+                    // is cancelled and you receive empty arrays.
+                    Log.d(TAG, "User interaction was cancelled.")
+
+                grantResults[0] == PackageManager.PERMISSION_GRANTED -> {
+                    // Permission was granted.
+                    val serviceIntent = Intent(this, AutoStartService::class.java)
+                    startForegroundService(serviceIntent)
+                }
+                else -> {
+                    // Permission denied.
+                    Snackbar.make(
+                        findViewById(R.id.activity_main),
+                        R.string.permission_denied_explanation,
+                        Snackbar.LENGTH_LONG
+                    )
+                        .setAction(R.string.settings) {
+                            // Build intent that displays the App settings screen.
+                            val intent = Intent()
+                            intent.action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
+                            val uri = Uri.fromParts(
+                                "package",
+                                BuildConfig.APPLICATION_ID,
+                                null
+                            )
+                            intent.data = uri
+                            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                            startActivity(intent)
+                        }
+                        .show()
+                }
+            }
+        }
     }
 }

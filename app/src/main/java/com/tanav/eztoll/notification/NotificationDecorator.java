@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.util.Log;
+import com.tanav.eztoll.R;
 
 import com.tanav.eztoll.MainActivity;
 
@@ -40,18 +41,16 @@ public class NotificationDecorator {
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
                 Intent.FLAG_ACTIVITY_SINGLE_TOP);
         PendingIntent contentIntent;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            contentIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT|PendingIntent.FLAG_MUTABLE);
-        } else {
-            contentIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        }
-
+        //change to support api 32 only
+        //if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+        contentIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT|PendingIntent.FLAG_MUTABLE);
+        //} else {
+        //    contentIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        //}
         // notification message
         try {
-
-
-            Notification noti = new Notification.Builder(context)
-                    .setSmallIcon(android.R.drawable.ic_dialog_info)
+            Notification noti = new Notification.Builder(context, CHANNEL_ID)
+                    .setSmallIcon(R.drawable.ic_eztoll_small_icon)
                     .setContentTitle(title)
                     .setContentText(contentText)
                     .setContentIntent(contentIntent)
