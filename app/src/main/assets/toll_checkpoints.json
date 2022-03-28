@@ -1,6 +1,6 @@
 [
   {
-    "id": 10100,
+    "id": 10001,
     "type": "CHECKPOINT",
     "lat": 43.855486,
     "lng": -79.170236,
@@ -8,7 +8,7 @@
   }
 ,
   {
-    "id": 10110,
+    "id": 500001,
     "type": "MIDPOINT",
     "lat": 43.853153,
     "lng": -79.180013,
@@ -16,7 +16,7 @@
   }
 ,
   {
-    "id": 10120,
+    "id": 500002,
     "type": "MIDPOINT",
     "lat": 43.850770,
     "lng": -79.189749,
@@ -24,7 +24,7 @@
   }
 ,
   {
-    "id": 10130,
+    "id": 500003,
     "type": "MIDPOINT",
     "lat": 43.848515,
     "lng": -79.199303,
@@ -32,7 +32,7 @@
   }
 ,
   {
-    "id": 10200,
+    "id": 10002,
     "type": "CHECKPOINT",
     "lat": 43.836664,
     "lng": -79.251150,
@@ -40,7 +40,7 @@
   }
 ,
   {
-    "id": 10210,
+    "id": 500004,
     "type": "MIDPOINT",
     "lat": 43.834296,
     "lng": -79.261170,
@@ -48,10 +48,26 @@
   }
 ,
   {
-    "id": 10300,
+    "id": 10003,
     "type": "CHECKPOINT",
     "lat": 43.832709,
     "lng": -79.267908,
     "remark": "Steel Ave E / Middlefield Rd"
+  }
+,
+  {
+    "id": 500005,
+    "type": "MIDPOINT",
+    "lat": 43.831980,
+    "lng": -79.271114,
+    "remark": "Steel Ave E / Milliken Park Entrance"
+  }
+,
+  {
+    "id": 10004,
+    "type": "CHECKPOINT",
+    "lat": 43.831051,
+    "lng": -79.275212,
+    "remark": "Steel Ave E / McCowan Rd"
   }
 ]

@@ -24,7 +24,7 @@ class TrackToggleAlarmReceiver : WakefulBroadcastReceiver() {
         // resume the tracking
         val pref: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context!!)
         val editor: SharedPreferences.Editor = pref.edit()
-        editor.putBoolean("sp_key_do_tracking", true)
+        editor.putBoolean(AppConst.PREF_DO_TRACKING, true)
         editor.commit()
 
         sendNotification(context!!)
@@ -33,7 +33,7 @@ class TrackToggleAlarmReceiver : WakefulBroadcastReceiver() {
     fun setAlarm(context: Context) {
         Log.d("sch", "TrackToggleAlarmReceiver, setAlarm() running")
         val pref = PreferenceManager.getDefaultSharedPreferences(context)
-        if (!pref.getBoolean("sp_key_do_tracking", true)) {
+        if (!pref.getBoolean(AppConst.PREF_DO_TRACKING, true)) {
             alarmMgr = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
             //val intent = Intent(context, TrackToggleAlarmReceiver::class.java)
             val intent = Intent(AppConst.ACTION_REMINDER)

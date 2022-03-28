@@ -47,4 +47,15 @@
     <string name="permission_rationale">Location permission needed for core functionality</string>
     <string name="permission_denied_explanation">Permission was denied, but is needed for core functionality.</string>
 
+    //track map
+    <string name="btn_today">Today\'s route</string>
+    <string name="btn_chosen_date">%1$d-%2$02d-%3$02d</string>
+    <string name="btn_hide_toll_route">Hiding toll roads</string>
+    <string name="btn_show_toll_route">Showing toll roads</string>
+    <string name="msg_3_dots">...</string>
+    <string name="msg_no_route_info">No route info on the selected day</string>
+    <string name="msg_no_route_info_today">No route info for you today</string>
+    <string name="msg_invoice">Invoice %1$d has been issued for this day</string>
+    <string name="msg_can_refresh">Invoice not yet ready for this day. You can get the estimated amount using the calculate button below.</string>
+
 </resources>

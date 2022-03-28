@@ -2,10 +2,18 @@ package com.tanav.eztoll.utilities
 
 import android.content.Context
 import android.util.Log
+import androidx.lifecycle.Observer
+import com.google.android.gms.maps.model.LatLng
+import com.google.maps.android.SphericalUtil
 import com.tanav.eztoll.AppConst
+import com.tanav.eztoll.database.*
+import com.tanav.eztoll.fragments.TrackMapFragment
+import com.tanav.eztoll.models.PointType
+import com.tanav.eztoll.models.TollMatchPoint
 import org.json.JSONArray
 import org.json.JSONTokener
 import java.io.IOException
+import java.lang.Math.abs
 
 class Utility {
     companion object {
@@ -19,7 +27,7 @@ class Utility {
                 ioException.printStackTrace()
                 Log.d("sch", "Utility.readCheckPointData() exception")
             }
-            Log.d("sch", "Utility.readCheckPointData(), json string:" + jsonString)
+            //Log.d("sch", "Utility.readCheckPointData(), json string:" + jsonString)
             return JSONTokener(jsonString).nextValue() as JSONArray
         }
     }

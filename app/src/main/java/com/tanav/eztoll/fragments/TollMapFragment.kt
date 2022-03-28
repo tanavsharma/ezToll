@@ -80,24 +80,24 @@ class TollMapFragment : Fragment(), OnMapReadyCallback {
         mMap.mapType = GoogleMap.MAP_TYPE_NORMAL
 
         var checkPointJsonArray = Utility.readCheckPointData(requireContext())
-        var points: ArrayList<LatLng> = ArrayList()
+        var checkPoints: ArrayList<LatLng> = ArrayList()
 
         for (i in 0 until checkPointJsonArray.length()) {
             val checkPoint = checkPointJsonArray.getJSONObject(i)
             val lat = checkPoint.getDouble("lat")
             val lng = checkPoint.getDouble("lng")
             val position = LatLng(lat, lng)
-            points.add(position)
+            checkPoints.add(position)
         }
         var lineOptions = PolylineOptions()
-        lineOptions.addAll(points);
-        lineOptions.width(10F);
-        lineOptions.color(Color.BLUE);
+        lineOptions.addAll(checkPoints)
+        lineOptions.width(10F)
+        lineOptions.color(Color.BLUE)
 
         //draw a line on Google map
-        mMap.addPolyline(lineOptions);
+        mMap.addPolyline(lineOptions)
 
         //show the middle track point of the toll road
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(points[checkPointJsonArray.length()/2], 10.0f))
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(checkPoints[checkPointJsonArray.length()/2], 10.0f))
     }
 }

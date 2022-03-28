@@ -7,7 +7,7 @@ import android.widget.EditText
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
-import com.tanav.eztoll.Models.User
+import com.tanav.eztoll.models.User
 import kotlinx.android.synthetic.main.activity_user_information.*
 
 class UserInformation : AppCompatActivity() {

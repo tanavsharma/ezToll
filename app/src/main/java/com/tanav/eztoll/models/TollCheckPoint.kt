@@ -1,4 +1,4 @@
-package com.tanav.eztoll.Models
+package com.tanav.eztoll.models
 
 data class  TollCheckPoint(
     val id: Int,

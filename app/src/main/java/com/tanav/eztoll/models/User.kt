@@ -1,6 +1,4 @@
-package com.tanav.eztoll.Models
-
-import android.net.Uri
+package com.tanav.eztoll.models
 
 data class User(val firstName:String,
                 val lastName:String,

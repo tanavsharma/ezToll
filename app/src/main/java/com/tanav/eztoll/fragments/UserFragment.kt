@@ -22,7 +22,7 @@ import com.google.firebase.ktx.Firebase
 import com.squareup.picasso.Picasso
 import com.tanav.eztoll.Interfaces.ImageListener
 import com.tanav.eztoll.Interfaces.ImageUploadListener
-import com.tanav.eztoll.Models.User
+import com.tanav.eztoll.models.User
 import com.tanav.eztoll.R
 import com.tanav.eztoll.Util
 

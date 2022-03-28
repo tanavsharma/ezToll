@@ -1,7 +1,6 @@
 package com.tanav.eztoll
 
 import android.Manifest
-import android.app.ProgressDialog
 import android.content.ContentValues.TAG
 import android.content.Intent
 import android.content.IntentFilter

@@ -42,8 +42,8 @@ class SettingsActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferen
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
         Log.d("sch", "SettingsActivity, onSharedPreferenceChanged running")
-        if (key == "sp_key_do_tracking") {
-            if (pref.getBoolean("sp_key_do_tracking", true)) {
+        if (key == AppConst.PREF_DO_TRACKING) {
+            if (pref.getBoolean(AppConst.PREF_DO_TRACKING, true)) {
                 Log.d("sch", getString(R.string.sp_do_tracking_enabled))
                 Toast.makeText(this, getString(R.string.sp_do_tracking_enabled), Toast.LENGTH_SHORT).show()
                 trackToggleAlarm.cancelAlarm(this)

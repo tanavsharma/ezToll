@@ -6,12 +6,16 @@ import androidx.room.*
 @Database(
     entities = [
         TrackingModel::class,
+        ChargesDetailsModel::class,
+        ChargesStatusModel::class
     ],
     version = 1,
     exportSchema = true
 )
 abstract class TrackingDatabase: RoomDatabase() {
     abstract fun trackingDao() : TrackingDao
+    abstract fun chargesDetailsDao() : ChargesDetailsDao
+    abstract fun chargesStatusDao() : ChargesStatusDao
 
     companion object {
         @Volatile
