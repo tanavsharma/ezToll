@@ -1,6 +1,7 @@
 package com.tanav.eztoll
 
 import android.Manifest
+import android.app.PendingIntent
 import android.content.ContentValues.TAG
 import android.content.Intent
 import android.content.IntentFilter
@@ -26,6 +27,7 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.tanav.eztoll.services.AutoStartService
+import com.tanav.eztoll.utilities.Utility
 import kotlinx.android.synthetic.main.activity_main.*
 
 private const val REQUEST_FOREGROUND_ONLY_PERMISSIONS_REQUEST_CODE = 34
@@ -121,6 +123,7 @@ class MainActivity : AppCompatActivity() {
                             Toast.makeText(applicationContext, "Signing You In....", Toast.LENGTH_SHORT).show()
 
                             val intent = Intent(this, UserInterface::class.java)
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
                             startActivity(intent)
                         } else {
                             Toast.makeText(applicationContext, "Wrong, Try again!", Toast.LENGTH_SHORT).show()
@@ -194,6 +197,21 @@ class MainActivity : AppCompatActivity() {
         } else {
             requestForegroundPermissions()
         }
+
+        //billing alarm settings
+        val intent = Intent(applicationContext, BillingReceiver::class.java)
+        val alarmIntent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            PendingIntent.getBroadcast(applicationContext, 0, intent, PendingIntent.FLAG_MUTABLE or PendingIntent.FLAG_NO_CREATE)
+        } else {
+            PendingIntent.getBroadcast(applicationContext, 0, intent, PendingIntent.FLAG_NO_CREATE)
+        }
+        if (alarmIntent == null) {
+            Log.d("sch", "MainActivity, onCreate(), billing alarm is set here")
+            Utility.setAlarmBilling(applicationContext)
+        }
+
+        //required by billing service
+        Utility.setApp1stRunDate(applicationContext)
     }
 
     private var flipper: ViewFlipper? = null

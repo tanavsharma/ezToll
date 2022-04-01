@@ -15,6 +15,7 @@ class TrackingRepository {
         private var trackingModelList: LiveData<List<TrackingModel>>? = null
         private var chargesDetailsModelList: LiveData<List<ChargesDetailsModel>>? = null
         private var chargesStatusModel: LiveData<ChargesStatusModel>? = null
+        private var chargesStatusModelList: LiveData<List<ChargesStatusModel>>? = null
 
         //initialize database
         private fun initializeDB(context: Context) : TrackingDatabase {
@@ -81,12 +82,21 @@ class TrackingRepository {
         }
 
         //Initialize insertChargesStatus()
-        fun insertChargesStatus(context: Context, trackDate: Int, invoiceId: Int) {
+        fun insertChargesStatus(context: Context, trackDate: Int, totalKm: Double, totalAmount: Double, paidDate: Int ) {
             trackingDatabase = initializeDB(context)
 
             CoroutineScope(IO).launch {
-                val chargesStatus = ChargesStatusModel(trackDate, invoiceId )
+                val chargesStatus = ChargesStatusModel(trackDate, totalKm, totalAmount, paidDate)
                 trackingDatabase!!.chargesStatusDao().insertChargesStatus(chargesStatus)
+            }
+        }
+
+        //Initialize updateChargesStatusPaidDate()
+        fun updateChargesStatusPaidDate(context: Context, paidDate: Int) {
+            trackingDatabase = initializeDB(context)
+
+            CoroutineScope(IO).launch {
+                trackingDatabase!!.chargesStatusDao().updateChargesStatusPaidDate(paidDate)
             }
         }
 
@@ -97,5 +107,17 @@ class TrackingRepository {
             return chargesStatusModel
         }
 
+        //Initialize getUnPaidChargesStatus()
+        fun getUnPaidChargesStatus(context: Context) : LiveData<List<ChargesStatusModel>>? {
+            trackingDatabase = initializeDB(context)
+            chargesStatusModelList = trackingDatabase!!.chargesStatusDao().getUnPaidChargesStatus()
+            return chargesStatusModelList
+        }
+
+        //Initialize getLatestChargesStatus() no live data
+        fun getLatestChargesStatus(context: Context) : ChargesStatusModel? {
+            trackingDatabase = initializeDB(context)
+            return trackingDatabase!!.chargesStatusDao().getLatestChargesStatus()
+        }
     }
 }

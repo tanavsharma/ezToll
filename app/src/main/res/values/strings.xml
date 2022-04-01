@@ -31,17 +31,32 @@
     <string name="sp_do_tracking_summary">Turn on / off the tracking function</string>
     <string name="sp_do_tracking_enabled">Auto Tracking Enabled</string>
     <string name="sp_do_tracking_disabled">Auto Tracking Disabled</string>
-    <string name="auto_resume_message">Auto Tracking is automatically resumed</string>
 
     //user profile
     <string name="update_profile">Update Profile</string>
-    <string name="payements">Payements</string>
+    <string name="payments">Payments</string>
     <string name="not_valid_card">Not Valid Card</string>
     <string name="validCard">Valid</string>
-    <string name="thankyouMessage">Thank you for your payment. It have been processed.</string>
+    <string name="thank_you_message">Thank you for your payment. It have been processed.</string>
     <string name="payment_confirmed">Payment Confirmed</string>
-    <string name="pastPayments">All your payment information and recipts are stored on our secure servers. You can click the button below to view your past payements.</string>
+    <string name="pastPayments">All your payment information and receipts are stored on our secure servers. You can click the button below to view your past payements.</string>
     <string name="payment_history">Payment History</string>
+
+    //user welcome
+    <string name="welcome">Welcome</string>
+    <string name="default_user_name">John Doe</string>
+    <string name="outstanding_amount">You have an outstanding amount of $%1$.2f</string>
+    <string name="proceed_to_payment">Proceed to payment</string>
+
+    //payment
+    <string name="total_due">Total Due\n$%1$.2f</string>
+    <string name="total_due_loading">Total Due\nLoading…</string>
+
+    //payment confirmed
+    <string name="back_to_home">Back to the home screen</string>
+
+    //payment history
+    <string name="payment_history_title">Payment History</string>
 
     //location service
     <string name="permission_rationale">Location permission needed for core functionality</string>
@@ -52,10 +67,17 @@
     <string name="btn_chosen_date">%1$d-%2$02d-%3$02d</string>
     <string name="btn_hide_toll_route">Hiding toll roads</string>
     <string name="btn_show_toll_route">Showing toll roads</string>
-    <string name="msg_3_dots">...</string>
+    <string name="msg_3_dots">…</string>
+    <string name="msg_loading">Loading…</string>
     <string name="msg_no_route_info">No route info on the selected day</string>
     <string name="msg_no_route_info_today">No route info for you today</string>
-    <string name="msg_invoice">Invoice %1$d has been issued for this day</string>
-    <string name="msg_can_refresh">Invoice not yet ready for this day. You can get the estimated amount using the calculate button below.</string>
+    <string name="msg_mileages">Your payment amount is $%1$.2f for %2$.2f km</string>
+    <string name="msg_can_refresh">Charges info not yet ready for this day. You can get the estimated amount using the calculate button below.</string>
+    <string name="msg_est_charges">The estimated charges is $%1$.2f for %2$.2f km.</string>
+    <string name="msg_est_charges_zero">You have no toll mileage up to this moment.</string>
+
+    //notification bar
+    <string name="outstanding_charges_message">Your have outstanding charges</string>
+    <string name="auto_resume_message">Auto Tracking is automatically resumed</string>
 
 </resources>

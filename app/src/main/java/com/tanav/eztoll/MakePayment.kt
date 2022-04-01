@@ -5,22 +5,24 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import kotlinx.android.synthetic.main.activity_payment_history.*
+import com.tanav.eztoll.database.ChargesStatusViewModel
 import java.time.LocalDateTime
 import java.time.temporal.ChronoField
 import java.util.*
 import java.util.UUID
 
 
-class PaymentHistory : AppCompatActivity() {
+class MakePayment : AppCompatActivity() {
 
     private lateinit var ccET: EditText
     private lateinit var nameOnCardET: EditText
@@ -34,18 +36,20 @@ class PaymentHistory : AppCompatActivity() {
     private lateinit var ccExpiryMonth: String
     private lateinit var ccExpiryYear: String
     private lateinit var ccCVV: String
+    private lateinit var valid: TextView
+    private lateinit var payBill: Button
 
     private lateinit var auth: FirebaseAuth
 
-
+    private lateinit var chargesStatusViewModel: ChargesStatusViewModel
+    private lateinit var costToCxTV: TextView
 
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_payment_history)
+        setContentView(R.layout.activity_make_payment)
 
-        val db = Firebase.firestore
         auth = Firebase.auth
 
         ccET = findViewById(R.id.creditcard)
@@ -53,13 +57,29 @@ class PaymentHistory : AppCompatActivity() {
         expiryMonthET = findViewById(R.id.expiryMonth)
         expiryYearET = findViewById(R.id.expiryYear)
         cvvET = findViewById(R.id.cvv)
-
+        valid = findViewById(R.id.valid)
+        payBill = findViewById(R.id.payBill)
 
         validTV = findViewById(R.id.valid)
+        costToCxTV = findViewById(R.id.costToCx)
 
+        //read room db outstanding amounts
+        chargesStatusViewModel = ViewModelProvider(this).get(ChargesStatusViewModel::class.java)
+        chargesStatusViewModel.getUnPaidChargesStatus(applicationContext)!!.observe(this, {
+            if (it.isNotEmpty()) {
+                var outstandingAmount = 0.00
+                for (cs in it) {
+                    outstandingAmount += cs.totalAmount
+                }
+                costToCxTV.text = getString(R.string.total_due, outstandingAmount.toFloat())
+            }
+            setPayBillListener()
+        })
+    }
 
+    private fun setPayBillListener() {
         payBill.setOnClickListener {
-
+            val db = Firebase.firestore
             val user = auth.currentUser!!.uid
             val current = LocalDateTime.now()
 
@@ -82,7 +102,8 @@ class PaymentHistory : AppCompatActivity() {
                 "12" to "December"
             )
 
-            val todayDate = currentDay.toString() + " " + monthDict[currentMonth.toString()] + ", " + currentYear.toString()
+            val todayDate =
+                currentDay.toString() + " " + monthDict[currentMonth.toString()] + ", " + currentYear.toString()
 
             ccNumber = ccET.text.toString()
             chName = nameOnCardET.text.toString()
@@ -90,56 +111,33 @@ class PaymentHistory : AppCompatActivity() {
             ccExpiryYear = expiryYearET.text.toString()
             ccCVV = cvvET.text.toString()
 
-            if(isValid(ccNumber) && !ccNumber.isEmpty() && !chName.isEmpty() && !ccExpiryMonth.isEmpty() && !ccExpiryYear.isEmpty() && isExpired(ccExpiryMonth,ccExpiryYear) && ! ccCVV.isEmpty()){
+            if (isValid(ccNumber) && !ccNumber.isEmpty() && !chName.isEmpty() && !ccExpiryMonth.isEmpty() && !ccExpiryYear.isEmpty() && isExpired(
+                    ccExpiryMonth,
+                    ccExpiryYear
+                ) && !ccCVV.isEmpty()
+            ) {
 
                 val rcpt = hashMapOf(
                     "chName" to chName,
                     "expiryMonth" to ccExpiryMonth,
                     "expiryYear" to ccExpiryYear,
                     "dateOfPayment" to todayDate,
-                    "amount" to "$34.99"
+                    "amount" to costToCxTV.text
                 )
 
                 db.collection(user).add(rcpt).addOnSuccessListener { documentReference ->
                     Log.d(TAG, "DocumentSnapshot added with ID: ${documentReference.id}")
-                }.addOnFailureListener{ e ->
+                }.addOnFailureListener { e ->
                     Log.w(TAG, "Error adding document", e)
                 }
 
 
                 val intent = Intent(applicationContext, PaymentConfirmed::class.java)
                 startActivity(intent)
-            }else{
+            } else {
                 valid.text = getString(R.string.not_valid_card)
             }
-
-
         }
-        viewPreviousBills.setOnClickListener {
-            val intent = Intent(applicationContext, PastPayements::class.java)
-            startActivity(intent)
-        }
-
-    }
-
-    fun isValid(cardNumber: String): Boolean {
-
-        var s1 = 0
-        var s2 = 0
-        val reverse = StringBuffer(cardNumber).reverse().toString()
-        for (i in reverse.indices) {
-            val digit = Character.digit(reverse[i], 10)
-            when {
-                i % 2 == 0 -> s1 += digit
-                else -> {
-                    s2 += 2 * digit
-                    when {
-                        digit >= 5 -> s2 -= 9
-                    }
-                }
-            }
-        }
-        return (s1 + s2) % 10 == 0
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -161,3 +159,23 @@ class PaymentHistory : AppCompatActivity() {
         return re
     }
 }
+
+    private fun isValid(cardNumber: String): Boolean {
+
+        var s1 = 0
+        var s2 = 0
+        val reverse = StringBuffer(cardNumber).reverse().toString()
+        for (i in reverse.indices) {
+            val digit = Character.digit(reverse[i], 10)
+            when {
+                i % 2 == 0 -> s1 += digit
+                else -> {
+                    s2 += 2 * digit
+                    when {
+                        digit >= 5 -> s2 -= 9
+                    }
+                }
+            }
+        }
+        return (s1 + s2) % 10 == 0
+    }

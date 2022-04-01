@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PaymentHistory">
+    tools:context=".MakePayment">
 
     <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -34,7 +34,7 @@
                 android:contentDescription="@string/logo" />
 
             <TextView
-                android:text="Total Due\n$34.99"
+                android:text="@string/total_due_loading"
                 android:gravity="center"
                 android:layout_weight="1"
                 android:id="@+id/costToCx"
@@ -256,23 +256,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
-
-        <Button
-            android:id="@+id/viewPreviousBills"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginStart="24dp"
-            android:layout_marginEnd="24dp"
-            android:backgroundTint="@color/pinkColor"
-            android:elevation="15dp"
-            android:gravity="center"
-            android:minHeight="48dp"
-            android:text="Previous Bills"
-            android:textAllCaps="false"
-            android:textColor="@color/textColor"
-            android:textSize="17sp"
-            tools:ignore="DuplicateSpeakableTextCheck,TextContrastCheck" />
     </LinearLayout>
 
 

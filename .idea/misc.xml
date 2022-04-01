@@ -10,11 +10,13 @@
         <entry key="app/src/main/res/layout/activity_forgot_passcode.xml" value="0.2776268115942029" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_past_payements.xml" value="0.175" />
-        <entry key="app/src/main/res/layout/activity_payment_confirmed.xml" value="0.1490036231884058" />
+        <entry key="app/src/main/res/layout/activity_payment_confirmed.xml" value="0.18" />
         <entry key="app/src/main/res/layout/activity_payment_history.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_user_information.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_user_interface.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_payment_history.xml" value="0.14673913043478262" />
         <entry key="app/src/main/res/layout/fragment_track_map.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_user.xml" value="0.14492753623188406" />
         <entry key="app/src/main/res/layout/list_item.xml" value="0.335" />
         <entry key="app/src/main/res/menu/option_menu.xml" value="0.2916666666666667" />
       </map>

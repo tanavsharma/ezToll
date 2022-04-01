@@ -8,7 +8,6 @@ import android.location.Location
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.transition.Visibility
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -31,16 +30,15 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Polyline
 import com.google.android.gms.maps.model.PolylineOptions
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.tanav.eztoll.database.ChargesDetailsViewModel
-import com.tanav.eztoll.database.ChargesStatusViewModel
-import com.tanav.eztoll.database.TrackingModel
-import com.tanav.eztoll.database.TrackingViewModel
+import com.tanav.eztoll.AppConst
+import com.tanav.eztoll.database.*
 import com.tanav.eztoll.utilities.Utility
 import kotlinx.android.synthetic.main.fragment_track_map.*
 import org.json.JSONArray
 import java.lang.Thread.sleep
 import java.time.LocalDateTime
 import java.util.concurrent.Executors
+import kotlin.math.roundToInt
 
 
 private const val ARG_PARAM1 = "param1"
@@ -82,6 +80,7 @@ class TrackMapFragment : Fragment(), OnMapReadyCallback {
     private var isRouteInfoExists: Boolean = false
     private var workDateTrackingList: List<TrackingModel>? = null
     private lateinit var checkPointJsonArray: JSONArray
+    private var tempCharges = HashMap<Int, String>()
 
     private val myExecutor = Executors.newSingleThreadExecutor()
     private val myHandler = Handler(Looper.getMainLooper())
@@ -123,8 +122,7 @@ class TrackMapFragment : Fragment(), OnMapReadyCallback {
                 fabCalculate.isEnabled = false
                 updateMapView()
             }
-        val rightNow = LocalDateTime.now()
-        initialDate = (rightNow.year * 10000) + (rightNow.month.value * 100) + (rightNow.dayOfMonth)
+        initialDate = Utility.todayInInt()
         targetDate = initialDate
 
     }
@@ -301,45 +299,57 @@ class TrackMapFragment : Fragment(), OnMapReadyCallback {
     private fun showSystemMessage() {
         Log.d("sch", "TrackMapFragment, showSystemMessage(), targetDate:$targetDate")
 
+        txtMessage.text = getString(R.string.msg_loading)
         //observer and observe() used to work with live-data
         chargesStatusViewModel.getChargesStatusByDate(myContext, targetDate)!!.observe(this, Observer {
-            var isInvoiceFound: Boolean = true
+            var isChargesInfoFound: Boolean = true
             if (it == null) {
                 //no record in the status table
-                isInvoiceFound = false
+                isChargesInfoFound = false
             }
-            else {
-                if (it.invoiceNumber <= 0) {
-                    //no invoice for the day
-                    isInvoiceFound = false
-                }
-            }
-            fabCalculate.isEnabled = (!isInvoiceFound) && isRouteInfoExists
+            fabCalculate.isEnabled = (!isChargesInfoFound) && isRouteInfoExists
 
             if (!isRouteInfoExists) {
-                //todo:
                 if (targetDate == initialDate)
                     txtMessage.text = getString(R.string.msg_no_route_info_today)
                 else
                     txtMessage.text = getString(R.string.msg_no_route_info)
-            } else if (isInvoiceFound) {
-                txtMessage.text = getString(R.string.msg_invoice, it?.invoiceNumber)
+            } else if (isChargesInfoFound) {
+                txtMessage.text = getString(R.string.msg_mileages, it?.totalAmount, it?.totalKm )
+            } else if(tempCharges[targetDate] != null) {
+                txtMessage.text = tempCharges[targetDate]
             } else {
                 txtMessage.text = getString(R.string.msg_can_refresh)
             }
             Log.d("sch", "TrackMapFragment, getChargesStatusByDate called")
-            Log.d("sch", "TrackMapFragment, invoiceNumber:" + it?.invoiceNumber)
+            Log.d("sch", "TrackMapFragment, totalKm:" + it?.totalKm + ", totalAmount:" + it?.totalAmount)
             Log.d("sch", "TrackMapFragment, isRouteInfoExists:$isRouteInfoExists")
         })
     }
 
     private fun calculateDayCharges() {
         myExecutor.execute {
-            sleep(1000)
+            //sleep(1000)
+            val chargesDetailsList = Utility.findDailyChargesDetails(myContext, targetDate, checkPointJsonArray)
             myHandler.post {
+                setAdhocMsg(chargesDetailsList)
                 progressbar.visibility = View.GONE
                 majorLayout.visibility = View.VISIBLE
             }
         }
+    }
+
+    private fun setAdhocMsg(cdList: List<ChargesDetailsModel>) {
+        var totalMeters = 0F
+        for (cd in cdList) {
+            totalMeters += cd.meters
+        }
+        var totalCharges = (AppConst.UNIT_CHARGES_PER_METER * totalMeters).toFloat()
+        if (totalCharges > 0) {
+            tempCharges[targetDate] = getString(R.string.msg_est_charges, totalCharges, totalMeters/1000)
+        } else {
+            tempCharges[targetDate] = getString(R.string.msg_est_charges_zero)
+        }
+        showSystemMessage()
     }
 }

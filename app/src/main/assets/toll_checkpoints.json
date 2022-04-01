@@ -70,4 +70,20 @@
     "lng": -79.275212,
     "remark": "Steel Ave E / McCowan Rd"
   }
+,
+  {
+    "id": 500006,
+    "type": "MIDPOINT",
+    "lat": 43.829848,
+    "lng": -79.280414,
+    "remark": "Steel Ave E / Strawberry Hills Dr"
+  }
+,
+  {
+    "id": 10005,
+    "type": "CHECKPOINT",
+    "lat": 43.828238,
+    "lng": -79.287205,
+    "remark": "Steel Ave E / Brimley Rd"
+  }
 ]

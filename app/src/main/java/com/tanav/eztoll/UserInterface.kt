@@ -59,10 +59,6 @@ class UserInterface : AppCompatActivity() {
             val intent = Intent(this, UserInformation::class.java)
             startActivity(intent)
             true
-        }else if(item.itemId == R.id.paymentScreen){
-            val intent = Intent(this, PaymentHistory::class.java)
-            startActivity(intent)
-            true
         }else{
             super.onOptionsItemSelected(item)
         }

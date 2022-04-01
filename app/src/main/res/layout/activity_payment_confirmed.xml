@@ -44,7 +44,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/thankyouMessage"
+                android:text="@string/thank_you_message"
                 android:textSize="25sp"
                 android:textAlignment="center"
                 />
@@ -80,7 +80,7 @@
                 android:elevation="15dp"
                 android:gravity="center"
                 android:minHeight="48dp"
-                android:text="@string/payment_history"
+                android:text="@string/back_to_home"
                 android:textAllCaps="false"
                 android:textColor="@color/textColor"
                 android:textSize="17sp"
