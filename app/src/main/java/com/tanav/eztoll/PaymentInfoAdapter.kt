@@ -1,5 +1,6 @@
 package com.tanav.eztoll
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,7 +18,7 @@ class PaymentInfoAdapter(private val paymentList : ArrayList<PaymentInfo>) : Rec
         val payment : PaymentInfo = paymentList[position]
         holder.amount.text = payment.amount.toString()
         holder.dateOfPayment.text = payment.dateOfPayment.toString()
-
+        Log.d("sch", "PaymentInfoAdapter, onBindViewHolder(), dateOfPayment:" + payment.dateOfPayment.toString())
     }
 
     override fun getItemCount(): Int {

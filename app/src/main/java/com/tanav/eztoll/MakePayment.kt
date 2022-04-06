@@ -71,7 +71,7 @@ class MakePayment : AppCompatActivity() {
                 for (cs in it) {
                     outstandingAmount += cs.totalAmount
                 }
-                costToCxTV.text = getString(R.string.total_due, outstandingAmount.toFloat())
+                costToCxTV.text = getString(R.string.total_due_amount, outstandingAmount.toFloat())
             }
             setPayBillListener()
         })

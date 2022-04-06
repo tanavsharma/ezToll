@@ -7,6 +7,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Build
+import android.os.SystemClock
 import android.util.Log
 import androidx.preference.PreferenceManager
 import androidx.legacy.content.WakefulBroadcastReceiver
@@ -43,9 +44,9 @@ class TrackToggleAlarmReceiver : WakefulBroadcastReceiver() {
             } else {
                 PendingIntent.getBroadcast(context, 0, intent, 0)
             }
-            alarmMgr!!.setExact(
+            alarmMgr!!.setExactAndAllowWhileIdle(
                 AlarmManager.ELAPSED_REALTIME_WAKEUP,
-                (AppConst.TEMP_OFF_DURATION * 60000).toLong(), alarmIntent
+                SystemClock.elapsedRealtime() + (AppConst.TEMP_OFF_DURATION * 60000).toLong(), alarmIntent
             )
 
         }

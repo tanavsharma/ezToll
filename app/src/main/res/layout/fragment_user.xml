@@ -6,6 +6,8 @@
     android:layout_height="match_parent"
     android:weightSum="10"
     android:orientation="vertical"
+    android:background="#B9F6CA"
+    android:backgroundTint="#B9F6CA"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".fragments.UserFragment">
 

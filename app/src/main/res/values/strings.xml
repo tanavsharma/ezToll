@@ -49,14 +49,17 @@
     <string name="proceed_to_payment">Proceed to payment</string>
 
     //payment
-    <string name="total_due">Total Due\n$%1$.2f</string>
-    <string name="total_due_loading">Total Due\nLoading…</string>
+    <string name="total_due_label">Total Due</string>
+    <string name="total_due_amount">$%1$.2f</string>
+    <string name="total_due_loading">Loading…</string>
 
     //payment confirmed
     <string name="back_to_home">Back to the home screen</string>
 
     //payment history
     <string name="payment_history_title">Payment History</string>
+    <string name="paid_date">Date</string>
+    <string name="paid_amount">Paid Amount</string>
 
     //location service
     <string name="permission_rationale">Location permission needed for core functionality</string>

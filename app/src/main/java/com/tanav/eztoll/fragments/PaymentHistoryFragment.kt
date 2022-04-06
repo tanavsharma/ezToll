@@ -79,6 +79,8 @@ class PaymentHistoryFragment : Fragment() {
                         paymentArrayList.add(dc.document.toObject(PaymentInfo::class.java))
                     }
                 }
+                paymentArrayList.reverse()
+                Log.d("sch","PaymentHistoryFragment, eventChangeListener(), paymentArrayList:$paymentArrayList")
                 myAdapter.notifyDataSetChanged()
             }
         })

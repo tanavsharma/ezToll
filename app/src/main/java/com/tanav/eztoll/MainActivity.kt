@@ -199,6 +199,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         //billing alarm settings
+        //check whether the alarm was set. it not, create the billing alarm
         val intent = Intent(applicationContext, BillingReceiver::class.java)
         val alarmIntent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             PendingIntent.getBroadcast(applicationContext, 0, intent, PendingIntent.FLAG_MUTABLE or PendingIntent.FLAG_NO_CREATE)

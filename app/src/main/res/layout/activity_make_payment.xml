@@ -8,13 +8,9 @@
     tools:context=".MakePayment">
 
     <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context=".MainActivity"
         android:weightSum="2">
 
         <LinearLayout
@@ -32,20 +28,33 @@
                 android:layout_weight="1"
                 app:srcCompat="@drawable/eztoll"
                 android:contentDescription="@string/logo" />
-
-            <TextView
-                android:text="@string/total_due_loading"
-                android:gravity="center"
-                android:layout_weight="1"
-                android:id="@+id/costToCx"
-                android:textSize="23sp"
+            <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="70dp"
                 android:layout_marginTop="45dp"
-                app:srcCompat="@drawable/eztoll"
-                android:contentDescription="@string/logo" />
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:weightSum="2">
+                <TextView
+                    android:text="@string/total_due_label"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:id="@+id/cost_label"
+                    android:textSize="23sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    />
+                <TextView
+                    android:text="@string/loading"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:id="@+id/costToCx"
+                    android:textSize="23sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    />
 
-
+            </LinearLayout>
         </LinearLayout>
 
         <androidx.cardview.widget.CardView
