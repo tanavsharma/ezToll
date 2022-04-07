@@ -83,4 +83,18 @@
     <string name="outstanding_charges_message">Your have outstanding charges</string>
     <string name="auto_resume_message">Auto Tracking is automatically resumed</string>
 
+    //links
+    <string name="linktosite">
+        <a href="https://www.docdroid.net/M07fJtt/eztoll-user-manual-pdf">Where can I get the user manual for ezToll?</a>
+    </string>
+    <string name="linktositedevices">
+        <a href="https://iahmed851.wixsite.com/eztoll/post/design-a-beautiful-blog">What devices are supported?</a>
+    </string>
+    <string name="linktositeprivacy">
+        <a href="https://iahmed851.wixsite.com/eztoll/post/grow-your-blog-community">Does EzToll value customers privacy?</a>
+    </string>
+    <string name="linktositerefund">
+        <a href="https://iahmed851.wixsite.com/eztoll/post/how-to-get-a-refund">How to get a refund?</a>
+    </string>
+
 </resources>

@@ -197,6 +197,11 @@ class MainActivity : AppCompatActivity() {
         } else {
             requestForegroundPermissions()
         }
+        //help center button
+        helpBtn.setOnClickListener {
+            val intent = Intent(applicationContext, HelpActivity::class.java)
+            startActivity(intent)
+        }
 
         //billing alarm settings
         //check whether the alarm was set. it not, create the billing alarm
