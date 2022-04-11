@@ -1,6 +1,8 @@
 package com.tanav.eztoll
 
 import android.content.Intent
+import android.media.AudioManager
+import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -12,6 +14,7 @@ import com.tanav.eztoll.fragments.PaymentHistoryFragment
 import com.tanav.eztoll.fragments.TollMapFragment
 import com.tanav.eztoll.fragments.TrackMapFragment
 import com.tanav.eztoll.fragments.UserFragment
+import java.io.IOException
 
 class UserInterface : AppCompatActivity() {
 
@@ -38,6 +41,7 @@ class UserInterface : AppCompatActivity() {
         // add the default fragment
         transaction.add(R.id.host_fragment_content_user_interface, UserFragment())
         transaction.commit()
+        playAudio()
 
     }
 
@@ -91,5 +95,18 @@ class UserInterface : AppCompatActivity() {
         transaction.commit()
 
         return true
+    }
+
+    private fun playAudio(){
+        val audioURL = "https://www.mboxdrive.com/login.mp3"
+        var mediaPlayer = MediaPlayer()
+        mediaPlayer!!.setAudioStreamType(AudioManager.STREAM_MUSIC)
+        try {
+            mediaPlayer!!.setDataSource(audioURL)
+            mediaPlayer!!.prepare()
+            mediaPlayer!!.start()
+        }catch (e : IOException){
+            e.printStackTrace()
+        }
     }
 }

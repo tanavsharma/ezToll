@@ -6,6 +6,10 @@
         <entry key="..\:/TeamProject/app/src/main/res/layout/activity_main.xml" value="0.358695652173913" />
         <entry key="..\:/TeamProjectEzTollTeam4/app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="..\:/ezToll-withSamsParts/ezToll/app/src/main/res/layout/activity_help.xml" value="0.22291666666666668" />
+        <entry key="..\:/ezToll-withSamsParts/ezToll/app/src/main/res/layout/activity_payment_confirmed.xml" value="0.18802083333333333" />
+        <entry key="..\:/ezToll-withSamsParts/ezToll/app/src/main/res/layout/activity_user_interface.xml" value="0.18802083333333333" />
+        <entry key="..\:/ezToll-withSamsParts/ezToll/app/src/main/res/layout/fragment_toll_map.xml" value="0.18802083333333333" />
+        <entry key="..\:/ezToll-withSamsParts/ezToll/app/src/main/res/layout/fragment_track_map.xml" value="0.18802083333333333" />
         <entry key="app/src/main/res/drawable/switch_highlighted.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/switch_unhighlight.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_forgot_passcode.xml" value="0.2776268115942029" />

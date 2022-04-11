@@ -5,6 +5,8 @@ import android.app.DatePickerDialog
 import android.content.Context
 import android.graphics.Color
 import android.location.Location
+import android.media.AudioManager
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -35,6 +37,7 @@ import com.tanav.eztoll.database.*
 import com.tanav.eztoll.utilities.Utility
 import kotlinx.android.synthetic.main.fragment_track_map.*
 import org.json.JSONArray
+import java.io.IOException
 import java.lang.Thread.sleep
 import java.time.LocalDateTime
 import java.util.concurrent.Executors
@@ -265,9 +268,11 @@ class TrackMapFragment : Fragment(), OnMapReadyCallback {
         if (isShowingTollRoads) {
             btnToggleTollRoads.text = getString(R.string.btn_show_toll_route)
             showTollRoads()
+            playAudioShowTollRoads()
         } else {
             btnToggleTollRoads.text = getString(R.string.btn_hide_toll_route)
             hideTollRoads()
+            playAudioHideTollRoads()
         }
     }
 
@@ -351,5 +356,31 @@ class TrackMapFragment : Fragment(), OnMapReadyCallback {
             tempCharges[targetDate] = getString(R.string.msg_est_charges_zero)
         }
         showSystemMessage()
+    }
+
+    private fun playAudioShowTollRoads(){
+        val audioURL = "https://www.mboxdrive.com/showingTollroads.mp3"
+        var mediaPlayer = MediaPlayer()
+        mediaPlayer!!.setAudioStreamType(AudioManager.STREAM_MUSIC)
+        try {
+            mediaPlayer!!.setDataSource(audioURL)
+            mediaPlayer!!.prepare()
+            mediaPlayer!!.start()
+        }catch (e : IOException){
+            e.printStackTrace()
+        }
+    }
+
+    private fun playAudioHideTollRoads(){
+        val audioURL = "https://www.mboxdrive.com/hidingTollroads.mp3"
+        var mediaPlayer = MediaPlayer()
+        mediaPlayer!!.setAudioStreamType(AudioManager.STREAM_MUSIC)
+        try {
+            mediaPlayer!!.setDataSource(audioURL)
+            mediaPlayer!!.prepare()
+            mediaPlayer!!.start()
+        }catch (e : IOException){
+            e.printStackTrace()
+        }
     }
 }
